@@ -1,0 +1,34 @@
+{% extends "job_board/base.html" %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="w-10/12 mx-auto">
+    <!-- Go back button -->
+    <p class="pb-6">
+        <a href="{% url 'home' %}" class="inline-flex items-center gap-2 bg-gray-900 text-white py-2 px-4 rounded-full hover:bg-gray-700 transition-colors">
+            <i class="fas fa-arrow-left"></i>
+            <span>Go back</span>
+        </a>
+    </p>
+
+    <!-- Job Details Card -->
+    <div class="rounded-lg shadow-lg p-8" style="background-color: #334155;">
+        <!-- Job Title -->
+        <h1 class="text-3xl font-bold text-[#F8FAFC] pb-4">{{ posting.title }}</h1>
+        <!-- Company -->
+        <p class="text-xl text-[#D1D5DB] pb-2">Company: <span class="font-semibold">{{ posting.company }}</span></p>
+        <!-- Salary -->
+        <p class="text-xl font-semibold text-[#F8FAFC] pb-4">Salary: ${{ posting.salary|intcomma }}/year</p>
+        <!-- Tags (Job type, level, location) -->
+        <div class="flex gap-2 flex-wrap pb-4">
+            <span class="bg-white text-[#1E40AF] text-sm px-3 py-1 rounded-full">Full time</span>
+            <span class="bg-white text-[#1E40AF] text-sm px-3 py-1 rounded-full">Senior level</span>
+            <span class="bg-white text-[#1E40AF] text-sm px-3 py-1 rounded-full">Remote</span>
+        </div>
+        <!-- Description -->
+        <p class="text-lg text-[#D1D5DB] leading-relaxed pb-4">{{ posting.description }}</p>
+    </div>
+</div>
+
+{% endblock content %}

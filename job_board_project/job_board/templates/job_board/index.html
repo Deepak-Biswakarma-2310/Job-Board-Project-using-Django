@@ -1,0 +1,40 @@
+{% extends "job_board/base.html" %}
+{% load humanize %}
+
+{% block content %}
+<div class="container mx-auto py-6">
+    <!-- Flexbox container for job cards with responsive width -->
+    <div class="flex flex-wrap justify-center gap-6">
+      {% for posting in job_postings %}
+        <!-- Job card with a fixed width for medium/large screens and responsive for smaller screens -->
+        <div class="w-full sm:w-1/2 lg:w-1/4 p-4">
+            <div class="rounded-lg shadow-lg p-6 transition-all duration-300 glow-card" style="background-color: {% cycle '#fee2e2' '#cffafe' '#e9d5ff' '#bbf7d0' '#fef08a' %};">
+                <!-- Imaginary Date -->
+                <p class="text-sm text-gray-600">20 May, 2023</p> <!-- Dummy Date -->
+                <!-- Company Name and Save Icon -->
+                <div class="flex justify-between items-center pb-2">
+                    <h2 class="text-sm font-semibold">{{ posting.company }}</h2> <!-- Smaller Font Size for Company Name -->
+                    <i class="fas fa-heart text-red-600"></i> <!-- Save Icon -->
+                </div>
+                <!-- Job Title -->
+                <h3 class="text-xl font-bold">{{ posting.title }}</h3> <!-- Larger Font Size for Job Title -->
+                <!-- Tags -->
+                <div class="flex gap-2 flex-wrap py-2">
+                    <span class="bg-gray-200 text-sm px-3 py-1 rounded-full">Full time</span>
+                    <span class="bg-gray-200 text-sm px-3 py-1 rounded-full">Senior level</span>
+                    <span class="bg-gray-200 text-sm px-3 py-1 rounded-full">Remote</span>
+                </div>
+                <!-- Salary and Details Button aligned horizontally -->
+                <div class="flex justify-between items-center pt-2">
+                    <p class="text-lg font-semibold text-gray-800">${{ posting.salary|intcomma }}/year</p>
+                    <a href="{% url 'job_detail' posting.pk %}" class="ml-4 inline-block bg-gray-900 text-white py-2 px-4 rounded-full hover:bg-gray-700">
+                        Details
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">{{ posting.location }}</p>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+</div>
+{% endblock content %}
